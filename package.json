@@ -1,0 +1,31 @@
+{
+	"name": "text-tool",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"serve": "vite preview",
+		"task:lint": "oxlint src",
+		"task:fmt": "oxfmt ."
+	},
+	"dependencies": {
+		"@solidjs/web": "^2.0.0-rc.11",
+		"@tailwindcss/vite": "^4.3.3",
+		"solid-js": "^2.0.0-rc.11",
+		"tailwindcss": "^4.3.3"
+	},
+	"devDependencies": {
+		"@solidjs/diagnostics": "^2.0.0-rc.11",
+		"@solidjs/vite-plugin": "^3.0.0-next.46",
+		"daisyui": "^5.7.47",
+		"eslint-plugin-solid": "~0.18.0",
+		"oxfmt": "^0.71.0",
+		"oxlint": "~1.79.0",
+		"typescript": "^5.9.2",
+		"vite": "^8.1.5"
+	},
+	"allowScripts": {
+		"fsevents@2.3.3": true
+	}
+}
