@@ -1,5 +1,11 @@
+import Notepad from "./components/Notepad";
+
 import "./App.css";
 
 export default function () {
-	return <h2>App</h2>;
+	return (
+		<div>
+			<Notepad />
+		</div>
+	);
 }
