@@ -1,3 +1,5 @@
+import path from "path";
+
 import solid from "@solidjs/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -7,6 +9,11 @@ export default defineConfig({
 	build: {
 		target: "esnext",
 		assetsInlineLimit: 0,
+	},
+	resolve: {
+		alias: {
+			"~": path.resolve("src"),
+		},
 	},
 	server: {
 		port: 3000,

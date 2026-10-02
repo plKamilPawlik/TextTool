@@ -1,6 +1,25 @@
+@import "lucide-static/font/lucide.css";
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/container-queries";
 
 @plugin "daisyui" {
 	themes: light --default;
+}
+
+.tiptap {
+	@apply prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl focus:outline-none;
+
+	display: block;
+	margin: 0 auto;
+	min-height: 100%;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+	color: var(--color-neutral-content);
+	content: attr(data-placeholder);
+	float: left;
+	height: 0;
+	pointer-events: none;
 }
