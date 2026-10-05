@@ -9,7 +9,7 @@
 }
 
 .tiptap {
-	@apply prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl focus:outline-none;
+	@apply prose sm:prose-base lg:prose-lg xl:prose-xl focus:outline-none;
 
 	display: block;
 	margin: 0 auto;

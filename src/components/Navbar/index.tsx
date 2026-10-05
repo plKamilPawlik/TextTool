@@ -6,7 +6,9 @@ export default function (props: { controlId: string }) {
 					<span class="icon-notebook" />
 				</label>
 			</div>
-			<div class="flex-1 mx-2 px-2">TextTools</div>
+			<div class="flex-1">
+				<span class="text-xl font-bold">TextTool</span>
+			</div>
 		</div>
 	);
 }
