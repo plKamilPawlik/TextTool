@@ -6,15 +6,16 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
-	plugins: [
-		solid({ start: true, diagnostics: true }),
-		tailwindcss(),
-		VitePWA({ registerType: "autoUpdate" }),
-	],
+	base: "/TextTool/",
 	build: {
 		target: "esnext",
 		assetsInlineLimit: 0,
 	},
+	plugins: [
+		solid({ diagnostics: true, start: true }),
+		tailwindcss(),
+		VitePWA({ registerType: "autoUpdate" }),
+	],
 	resolve: {
 		alias: {
 			"~": path.resolve("src"),

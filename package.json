@@ -1,11 +1,13 @@
 {
 	"name": "text-tool",
 	"version": "0.0.1",
+	"homepage": "https://plkamilpawlik.github.io/TextTool",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
 		"serve": "vite preview",
+		"deploy": "gh-pages -d dist/client",
 		"task:lint": "oxlint src",
 		"task:fmt": "oxfmt ."
 	},
@@ -28,6 +30,7 @@
 		"@types/node": "^26.6.4",
 		"daisyui": "^5.7.47",
 		"eslint-plugin-solid": "~0.18.0",
+		"gh-pages": "^6.1.1",
 		"oxfmt": "^0.71.0",
 		"oxlint": "~1.79.0",
 		"typescript": "^5.9.2",

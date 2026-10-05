@@ -15,7 +15,7 @@ export default function () {
 		const htmlBlob = new Blob([html], { type: "text/html" });
 		const textBlob = new Blob([text], { type: "text/plain" });
 
-		return navigator.clipboard.write([
+		await navigator.clipboard.write([
 			new ClipboardItem({
 				"text/html": htmlBlob,
 				"text/plain": textBlob,
