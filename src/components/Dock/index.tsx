@@ -1,34 +1,28 @@
-import { createStore, onSettled } from "solid-js";
+import { Show } from "solid-js";
 
-import { editorRef } from "../Editor";
+import { useEditor } from "~/contexts/editor";
 
 export default function () {
-	const [stats, setStats] = createStore({
-		selection: "",
-		characters: 0,
-		words: 0,
-	});
+	const { editor } = useEditor();
 
-	onSettled(() => {
-		editorRef.on("selectionUpdate", ({ editor }) => {
-			const { from, to } = editor.state.selection;
+	const characters = () => editor()!.storage.characterCount.characters();
+	const words = () => editor()!.storage.characterCount.words();
 
-			setStats(() => ({
-				selection: editor.state.doc.textBetween(from, to, "\n"),
-				characters: editor.storage.characterCount.characters(),
-				words: editor.storage.characterCount.words(),
-			}));
-		});
-	});
+	const selection = () => {
+		const { from, to } = editor()!.state.selection;
+		return editor()!.state.doc.textBetween(from, to, "\n");
+	};
 
 	return (
-		<div class="dock dock-xs static">
-			<div class="max-w-min">
-				<span class="dock-label text-nowrap text-xs">
-					{stats.words} words · {stats.characters} characters
-					{stats.selection && ` (${stats.selection.length} selected)`}
-				</span>
+		<Show when={editor()}>
+			<div class="dock dock-xs h-min static">
+				<div class="max-w-min mr-auto">
+					<span class="dock-label text-nowrap text-xs">
+						{words()} words · {characters()} characters
+						{selection() && ` (${selection().length} selected)`}
+					</span>
+				</div>
 			</div>
-		</div>
+		</Show>
 	);
 }
