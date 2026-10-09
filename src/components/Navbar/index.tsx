@@ -1,12 +1,12 @@
 import { useEditor } from "~/contexts/editor";
 
-export default function (props: { controlId: string }) {
+export default function (props: { sidebarId: string }) {
 	const { open } = useEditor();
 
 	return (
 		<div class="navbar w-full gap-2">
 			<div>
-				<label class="btn btn-ghost btn-square drawer-button text-xl" for={props.controlId}>
+				<label class="btn btn-ghost btn-square drawer-button text-xl" for={props.sidebarId}>
 					<span class="icon-notebook" />
 				</label>
 			</div>

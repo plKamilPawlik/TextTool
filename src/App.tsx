@@ -32,15 +32,15 @@ export default function () {
 		>
 			<EditorProvider>
 				<div class="drawer h-dvh w-dvw">
-					<input id={sidebarId} class="drawer-toggle" type="checkbox" />
+					<input id={sidebarId} class="drawer-toggle " type="checkbox" />
 					<div class="drawer-content flex flex-col overflow-hidden">
-						<Navbar controlId={sidebarId} />
+						<Navbar sidebarId={sidebarId} />
 						<Toolbar />
 						<Editor />
 						<Dock />
 					</div>
 					<div class="drawer-side">
-						<Sidebar controlId={sidebarId} />
+						<Sidebar sidebarId={sidebarId} />
 					</div>
 				</div>
 			</EditorProvider>
