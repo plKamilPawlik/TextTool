@@ -1,5 +1,5 @@
 declare interface Note {
-	_id?: number;
+	_id?: IDBValidKey;
 	content: string;
 	timestamp: number;
 }

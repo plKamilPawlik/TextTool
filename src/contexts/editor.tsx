@@ -1,14 +1,7 @@
 import { Editor } from "@tiptap/core";
 import { CharacterCount, Placeholder } from "@tiptap/extensions";
 import { StarterKit } from "@tiptap/starter-kit";
-import {
-	createContext,
-	createSignal,
-	flush,
-	onCleanup,
-	ParentProps,
-	useContext,
-} from "solid-js";
+import { createContext, createSignal, flush, ParentProps, useContext } from "solid-js";
 
 import { useNotes } from "./notes";
 
@@ -22,7 +15,7 @@ export function EditorProvider(props: ParentProps<{ content?: string }>) {
 	const { save } = useNotes();
 
 	const [editor, setEditor] = createSignal<Editor | undefined>(undefined, { equals: false });
-	const [noteId, setNoteId] = createSignal<number | undefined>(undefined);
+	const [noteId, setNoteId] = createSignal<IDBValidKey | undefined>(undefined);
 
 	function mount(ref: HTMLElement): void {
 		const instance = new Editor({
@@ -40,12 +33,17 @@ export function EditorProvider(props: ParentProps<{ content?: string }>) {
 				setEditor(editor);
 			},
 			onUpdate({ editor }) {
-				setNoteId(save({ _id: noteId(), content: editor.getHTML(), timestamp: Date.now() }));
+				if (!editor.storage.characterCount.words()) return;
+
+				const _id = noteId();
+				const content = editor.getHTML();
+				const timestamp = Date.now();
+
+				save({ _id, content, timestamp }).then(setNoteId);
 			},
 		});
 
-		setEditor(() => instance);
-		onCleanup(() => instance.destroy());
+		setEditor(instance);
 	}
 
 	function open(note?: Note): void {

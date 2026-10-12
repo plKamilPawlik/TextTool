@@ -1,22 +1,28 @@
-import { createContext, createSignal, ParentProps, useContext } from "solid-js";
+import { createContext, createSignal, onSettled, ParentProps, useContext } from "solid-js";
+
+import { getNotes, saveNote } from "~/services/idb";
 
 export const NotesContext = createContext<{
 	notes(): Note[];
-	save(note: Note): number;
+	refresh(): Promise<Note[]>;
+	save(note: Note): Promise<IDBValidKey>;
 }>();
 
-export function NotesProvider(props: ParentProps<{ notes?: Note[] }>) {
-	const [notes, setNotes] = createSignal<Note[]>(props.notes || []);
+export function NotesProvider(props: ParentProps) {
+	const [notes, setNotes] = createSignal<Note[]>([]);
 
-	function save(note: Note): number {
-		if (typeof note._id !== "number") note._id = Math.random();
-
-		setNotes((notes) => [note, ...notes.filter(({ _id }) => _id !== note._id)]);
-
-		return note._id;
+	async function refresh(): Promise<Note[]> {
+		return getNotes().then(setNotes);
 	}
 
-	return <NotesContext value={{ notes, save }}>{props.children}</NotesContext>;
+	async function save(note: Note): Promise<IDBValidKey> {
+		const id = await saveNote(note);
+		return refresh().then(() => id);
+	}
+
+	onSettled(() => void refresh());
+
+	return <NotesContext value={{ notes, refresh, save }}>{props.children}</NotesContext>;
 }
 
 export function useNotes() {
