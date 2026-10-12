@@ -15,13 +15,15 @@ export default function () {
 			<EditorProvider>
 				<div class="drawer h-dvh w-dvw">
 					<input id={sidebarId} class="drawer-toggle" type="checkbox" />
-					<div class="drawer-content flex flex-col overflow-hidden">
-						<Navbar sidebarId={sidebarId} />
-						<Toolbar />
-						<Editor />
-						<Dock />
+					<div class="drawer-content overflow-hidden">
+						<main class="flex flex-col h-full">
+							<Navbar sidebarId={sidebarId} />
+							<Toolbar />
+							<Editor />
+							<Dock />
+						</main>
 					</div>
-					<div class="drawer-side">
+					<div class="drawer-side overflow-hidden">
 						<Sidebar sidebarId={sidebarId} />
 					</div>
 				</div>
