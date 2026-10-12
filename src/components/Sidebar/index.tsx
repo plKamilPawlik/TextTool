@@ -18,7 +18,7 @@ export default function (props: { sidebarId: string }) {
 		<>
 			<label for={props.sidebarId} class="drawer-overlay" />
 			<aside class="grid bg-base-200 w-80 h-full">
-				<div class="flex flex-col overflow-scroll">
+				<div class="flex flex-col overflow-hidden justify-between">
 					<Preview closeSidebar={closeSidebar} />
 					<Footer closeSidebar={closeSidebar} />
 				</div>

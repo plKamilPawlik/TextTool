@@ -9,7 +9,7 @@ export function Footer(props: { closeSidebar(): void }) {
 	}
 
 	return (
-		<div class="dock sticky bottom-0 bg-base-200 mt-auto">
+		<div class="dock dock-xs static bg-base-200">
 			<button class="btn btn-neutral btn-wide flex-row" onClick={() => openNote()}>
 				<span class="icon-plus" /> New Note
 			</button>

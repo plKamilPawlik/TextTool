@@ -15,7 +15,7 @@ export default function () {
 
 	return (
 		<Show when={editor()}>
-			<div class="dock dock-xs h-min static">
+			<div class="dock dock-xs static">
 				<div class="max-w-min mr-auto">
 					<span class="dock-label text-nowrap text-xs">
 						{words()} words · {characters()} characters

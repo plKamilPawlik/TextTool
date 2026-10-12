@@ -10,7 +10,7 @@ export default function (props: { sidebarId: string }) {
 					<span class="icon-notebook" />
 				</label>
 			</div>
-			<div class="grow">
+			<div class="flex-1">
 				<h2 class="text-xl font-bold">TextTool</h2>
 			</div>
 			<div>

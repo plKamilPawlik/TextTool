@@ -19,7 +19,7 @@ export function Preview(props: { closeSidebar(): void }) {
 	}
 
 	return (
-		<ul class="list p-2">
+		<ul class="list overflow-auto p-2">
 			<For each={notes()} keyed={(note) => note._id}>
 				{(note) => (
 					<li class="list-row">
