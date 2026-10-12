@@ -13,7 +13,9 @@ export function NotesProvider(props: ParentProps) {
 	const [notes, setNotes] = createSignal<Note[]>([]);
 
 	async function refresh(): Promise<Note[]> {
-		return getNotes().then(setNotes);
+		return getNotes().then((notes) =>
+			setNotes(notes.sort((a, b) => b.timestamp - a.timestamp)),
+		);
 	}
 
 	async function remove(note: Note): Promise<Note[]> {

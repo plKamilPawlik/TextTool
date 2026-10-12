@@ -24,10 +24,25 @@ export default function () {
 	}
 
 	async function pasteFromClipboard(): Promise<void> {
-		const text = await navigator.clipboard.readText();
+		const clipboardItems = await navigator.clipboard.read();
 
-		editor()!.commands.insertContent(text);
-		editor()!.commands.focus();
+		for (const item of clipboardItems) {
+			if (item.types.includes("text/html")) {
+				const blob = await item.getType("text/html");
+				const htmlText = await blob.text();
+
+				editor()!.view.pasteHTML(htmlText);
+				editor()!.commands.focus();
+			}
+
+			if (item.types.includes("text/plain")) {
+				const blob = await item.getType("text/plain");
+				const plainText = await blob.text();
+
+				editor()!.view.pasteText(plainText);
+				editor()!.commands.focus();
+			}
+		}
 	}
 
 	return (
