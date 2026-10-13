@@ -5,7 +5,7 @@ export default function (props: { sidebarId: string }) {
 
 	return (
 		<div class="navbar w-full gap-2">
-			<div>
+			<div class="xl:hidden">
 				<label class="btn btn-ghost btn-square drawer-button text-xl" for={props.sidebarId}>
 					<span class="icon-notebook" />
 				</label>

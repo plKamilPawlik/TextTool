@@ -13,7 +13,7 @@ export default function () {
 	return (
 		<NotesProvider>
 			<EditorProvider>
-				<div class="drawer h-dvh w-dvw">
+				<div class="h-dvh w-dvw drawer xl:drawer-open">
 					<input id={sidebarId} class="drawer-toggle" type="checkbox" />
 					<div class="drawer-content overflow-hidden">
 						<main class="flex flex-col h-full">

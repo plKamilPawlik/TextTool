@@ -6,4 +6,12 @@ export default defineConfig({
 	ignorePatterns: ["**/*.gen.*", "dist"],
 	settings: solidV2.settings,
 	rules: solidV2.rules,
+	overrides: [
+		{
+			files: ["*.jsx", "*.tsx"],
+			rules: {
+				"solid/no-innerhtml": 0,
+			},
+		},
+	],
 });

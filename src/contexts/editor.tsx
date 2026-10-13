@@ -3,6 +3,8 @@ import { CharacterCount, Placeholder } from "@tiptap/extensions";
 import { StarterKit } from "@tiptap/starter-kit";
 import { createContext, createSignal, flush, ParentProps, useContext } from "solid-js";
 
+import { createDebounce } from "~/hooks/debounce";
+
 import { useNotes } from "./notes";
 
 export const EditorContext = createContext<{
@@ -12,10 +14,23 @@ export const EditorContext = createContext<{
 }>();
 
 export function EditorProvider(props: ParentProps<{ content?: string }>) {
-	const { save } = useNotes();
+	const { remove, save } = useNotes();
 
 	const [editor, setEditor] = createSignal<Editor | undefined>(undefined, { equals: false });
 	const [noteId, setNoteId] = createSignal<IDBValidKey | undefined>(undefined);
+
+	const saveEdit = createDebounce((editor: Editor) => {
+		const _id = noteId();
+
+		if (editor.storage.characterCount.words()) {
+			const content = editor.getHTML();
+			const timestamp = Date.now();
+
+			save({ _id, content, timestamp }).then(setNoteId);
+		} else if (_id) {
+			remove(_id);
+		}
+	}, 1000);
 
 	function mount(ref: HTMLElement): void {
 		const instance = new Editor({
@@ -33,13 +48,7 @@ export function EditorProvider(props: ParentProps<{ content?: string }>) {
 				setEditor(editor);
 			},
 			onUpdate({ editor }) {
-				if (!editor.storage.characterCount.words()) return;
-
-				const _id = noteId();
-				const content = editor.getHTML();
-				const timestamp = Date.now();
-
-				save({ _id, content, timestamp }).then(setNoteId);
+				saveEdit(editor);
 			},
 		});
 

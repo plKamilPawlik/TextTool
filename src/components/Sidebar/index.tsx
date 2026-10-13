@@ -1,7 +1,7 @@
 import { onSettled } from "solid-js";
 
 import { Footer } from "./_footer";
-import { Preview } from "./_preview";
+import { PreviewList } from "./_preview";
 
 export default function (props: { sidebarId: string }) {
 	let checkbox!: HTMLInputElement;
@@ -17,9 +17,9 @@ export default function (props: { sidebarId: string }) {
 	return (
 		<>
 			<label for={props.sidebarId} class="drawer-overlay" />
-			<aside class="grid bg-base-200 w-80 h-full">
+			<aside class="grid w-80 h-full bg-base-200 border-base-300 border-r">
 				<div class="flex flex-col overflow-hidden justify-between">
-					<Preview closeSidebar={closeSidebar} />
+					<PreviewList closeSidebar={closeSidebar} />
 					<Footer closeSidebar={closeSidebar} />
 				</div>
 			</aside>

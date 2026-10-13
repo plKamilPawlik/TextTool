@@ -1,5 +1,9 @@
-declare interface Note {
+declare interface Note extends Partial<NoteOptions> {
 	_id?: IDBValidKey;
-	content: string;
 	timestamp: number;
+	content: string;
+}
+
+declare interface NoteOptions {
+	isPinned: boolean;
 }

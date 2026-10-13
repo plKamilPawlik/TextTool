@@ -1,11 +1,12 @@
 import { createContext, createSignal, onSettled, ParentProps, useContext } from "solid-js";
 
-import { getNotes, removeNote, saveNote } from "~/services/idb";
+import { daysAgo } from "~/services/date";
+import { getNotes, removeNote, removeNotes, saveNote } from "~/services/idb";
 
 export const NotesContext = createContext<{
 	notes(): Note[];
 	refresh(): Promise<Note[]>;
-	remove(note: Note): Promise<Note[]>;
+	remove(id: IDBValidKey): Promise<Note[]>;
 	save(note: Note): Promise<IDBValidKey>;
 }>();
 
@@ -18,8 +19,8 @@ export function NotesProvider(props: ParentProps) {
 		);
 	}
 
-	async function remove(note: Note): Promise<Note[]> {
-		return removeNote(note._id!).then(refresh);
+	async function remove(id: IDBValidKey): Promise<Note[]> {
+		return removeNote(id).then(refresh);
 	}
 
 	async function save(note: Note): Promise<IDBValidKey> {
@@ -27,7 +28,7 @@ export function NotesProvider(props: ParentProps) {
 		return refresh().then(() => id);
 	}
 
-	onSettled(() => void refresh());
+	onSettled(() => void removeNotes(daysAgo(7)).then(refresh));
 
 	return <NotesContext value={{ notes, refresh, remove, save }}>{props.children}</NotesContext>;
 }

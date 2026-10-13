@@ -3,7 +3,7 @@ import { For } from "solid-js";
 import { useEditor } from "~/contexts/editor";
 import { useNotes } from "~/contexts/notes";
 
-export function Preview(props: { closeSidebar(): void }) {
+export function PreviewList(props: { closeSidebar(): void }) {
 	const { open } = useEditor();
 	const { notes, remove } = useNotes();
 
@@ -14,7 +14,7 @@ export function Preview(props: { closeSidebar(): void }) {
 
 	function safeRemove(note: Note) {
 		if (confirm("Are you sure you want to delete this note?")) {
-			remove(note);
+			remove(note._id!).then(() => open());
 		}
 	}
 
@@ -23,28 +23,42 @@ export function Preview(props: { closeSidebar(): void }) {
 			<For each={notes()} keyed={(note) => note._id}>
 				{(note) => (
 					<li class="list-row">
-						<div
-							class="list-col-grow hover:cursor-pointer hover:opacity-60"
-							role="button"
-							tabindex={0}
-							onClick={() => openNote(note())}
-						>
-							<p class="line-clamp-2 font-semibold" innerHTML={note().content} />
-							<p class="line-clamp-1 text-neutral-500 text-xs">
-								<time>{new Date(note().timestamp).toDateString()}</time>
-							</p>
+						<div class="list-col-grow">
+							<PreviewNote note={note()} open={() => openNote(note())} />
 						</div>
 						<div>
-							<button
-								class="btn btn-ghost btn-square btn-sm text-sm"
-								onClick={() => safeRemove(note())}
-							>
-								<span class="icon-trash" />
-							</button>
+							<ButtonDelete delete={() => safeRemove(note())} />
 						</div>
 					</li>
 				)}
 			</For>
 		</ul>
+	);
+}
+
+export function PreviewNote(props: { note: Note; open(): void }) {
+	return (
+		<div
+			class="hover:cursor-pointer hover:opacity-60"
+			role="button"
+			tabindex={0}
+			onClick={() => props.open()}
+		>
+			<div class="h-24 flex flex-col gap-1">
+				<p class="line-clamp-1 font-semibold" innerHTML={props.note.content} />
+				<p class="line-clamp-2 font-extralight" innerHTML={props.note.content} />
+				<p class="line-clamp-1 text-neutral-500 text-xs mt-auto">
+					<time>{new Date(props.note.timestamp).toDateString()}</time>
+				</p>
+			</div>
+		</div>
+	);
+}
+
+export function ButtonDelete(props: { delete(): void }) {
+	return (
+		<button class="btn btn-ghost btn-square btn-sm text-sm" onClick={() => props.delete()}>
+			<span class="icon-trash" />
+		</button>
 	);
 }
