@@ -3,6 +3,8 @@ import { For } from "solid-js";
 import { useEditor } from "~/contexts/editor";
 import { useNotes } from "~/contexts/notes";
 
+import { ButtonDelete } from "./_button";
+
 export function PreviewList(props: { closeSidebar(): void }) {
 	const { open } = useEditor();
 	const { notes, remove } = useNotes();
@@ -14,7 +16,7 @@ export function PreviewList(props: { closeSidebar(): void }) {
 
 	function safeRemove(note: Note) {
 		if (confirm("Are you sure you want to delete this note?")) {
-			remove(note._id!).then(() => open());
+			remove(note._id!);
 		}
 	}
 
@@ -52,13 +54,5 @@ export function PreviewNote(props: { note: Note; open(): void }) {
 				</p>
 			</div>
 		</div>
-	);
-}
-
-export function ButtonDelete(props: { delete(): void }) {
-	return (
-		<button class="btn btn-ghost btn-square btn-sm text-sm" onClick={() => props.delete()}>
-			<span class="icon-trash" />
-		</button>
 	);
 }

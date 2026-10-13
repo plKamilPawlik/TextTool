@@ -1,8 +1,6 @@
-import { useEditor } from "~/contexts/editor";
+import { EditMode, Locale, NewNote } from "./_action";
 
 export default function (props: { sidebarId: string }) {
-	const { open } = useEditor();
-
 	return (
 		<div class="navbar w-full gap-2">
 			<div class="xl:hidden">
@@ -10,13 +8,13 @@ export default function (props: { sidebarId: string }) {
 					<span class="icon-notebook" />
 				</label>
 			</div>
-			<div class="flex-1">
+			<div class="flex flex-row flex-1">
 				<h2 class="text-xl font-bold">TextTool</h2>
 			</div>
-			<div>
-				<button class="btn btn-ghost btn-square text-xl" onClick={() => open()}>
-					<span class="icon-plus" />
-				</button>
+			<div class="flex felx-row gap-2 items-center cursor-pointer">
+				<NewNote />
+				<EditMode />
+				<Locale />
 			</div>
 		</div>
 	);
