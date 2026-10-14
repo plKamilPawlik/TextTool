@@ -30,16 +30,17 @@ export function Grammar() {
 }
 
 export function Locale() {
-	const { lang, setLocale } = useLocale();
+	const { lang, setLocale, t } = useLocale();
 
 	return (
 		<select
 			class="select select-ghost text-lg w-16"
+			aria-label={t("locale.label")}
 			onChange={(e) => setLocale(e.target.value)}
 			value={lang()}
 		>
 			<option disabled selected>
-				Language
+				{t("locale.label")}
 			</option>
 			<option value="en">🇺🇸</option>
 			<option value="pl">🇵🇱</option>

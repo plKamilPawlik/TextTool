@@ -5,6 +5,7 @@ import { createContext, createEffect, createSignal, ParentProps, useContext } fr
 
 import { createDebounce } from "~/hooks/debounce";
 
+import { useLocale } from "./locale";
 import { useNotes } from "./notes";
 
 export const EditorContext = createContext<{
@@ -14,11 +15,15 @@ export const EditorContext = createContext<{
 
 export function EditorProvider(props: ParentProps) {
 	let editorInstance!: Editor;
+	let placeholderText!: string;
 
 	const { draft, edit, remove } = useNotes();
+	const { t } = useLocale();
+
 	const [editor, setEditor] = createSignal<Editor | null>(null, { equals: false });
 
-	const saveEdit = createDebounce((editor: Editor) => {
+	const translation = () => t("editor.placeholder");
+	const updateDraft = createDebounce((editor: Editor) => {
 		if (editor.storage.characterCount.words()) {
 			edit({ content: editor.getHTML(), timestamp: Date.now() });
 		} else {
@@ -34,25 +39,33 @@ export function EditorProvider(props: ParentProps) {
 				StarterKit,
 				CharacterCount,
 				Placeholder.configure({
-					placeholder: "Write something...",
+					placeholder: () => placeholderText,
 				}),
 			],
 			onTransaction({ editor }) {
 				setEditor(editor);
 			},
 			onUpdate({ editor }) {
-				saveEdit(editor);
+				updateDraft(editor);
 			},
 		});
 
 		setEditor(editorInstance);
 	}
 
-	createEffect(draft, (next, prev) => {
-		if (next._id !== prev?._id) {
-			editorInstance.commands.setContent(next.content);
+	function setContent(note: Note, prev?: Note): void {
+		if (note._id !== prev?._id) {
+			editorInstance.commands.setContent(note.content);
 		}
-	});
+	}
+
+	function setPlaceholder(text: string): void {
+		placeholderText = text;
+		editorInstance.view.dispatch(editorInstance.state.tr);
+	}
+
+	createEffect(draft, (note, prev) => setContent(note, prev));
+	createEffect(translation, (text) => setPlaceholder(text));
 
 	return <EditorContext value={{ editor, mount }}>{props.children}</EditorContext>;
 }

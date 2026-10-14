@@ -1,16 +1,22 @@
+import { useLocale } from "~/contexts/locale";
 import { useNotes } from "~/contexts/notes";
 
 export function DeleteNote(props: { note: Note }) {
 	const { remove } = useNotes();
+	const { t } = useLocale();
 
 	function safeRemove(): void {
-		if (confirm("Are you sure you want to delete this note?")) {
+		if (confirm(t("notes.confirmDelete"))) {
 			remove(props.note._id);
 		}
 	}
 
 	return (
-		<button class="btn btn-ghost btn-square btn-sm text-base" onClick={() => safeRemove()}>
+		<button
+			class="btn btn-ghost btn-square btn-sm text-base"
+			aria-label={t("dock.deleteNote")}
+			onClick={() => safeRemove()}
+		>
 			<span class="icon-trash" />
 		</button>
 	);

@@ -1,4 +1,8 @@
+import { useLocale } from "~/contexts/locale";
+
 export function SpeedDial() {
+	const { t } = useLocale();
+
 	return (
 		<div class="fab absolute">
 			<div class="btn btn-lg btn-circle btn-primary" role="button" tabindex={0}>
@@ -9,26 +13,26 @@ export function SpeedDial() {
 				<span class="icon-x" />
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip="Clear all styles">
-				<button class="btn btn-lg btn-circle">
+			<div class="tooltip tooltip-left" data-tip={t("dock.clearStyles")}>
+				<button class="btn btn-lg btn-circle" aria-label={t("dock.clearStyles")}>
 					<span class="icon-broom-sparkles" />
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip="Copy as plain text">
-				<button class="btn btn-lg btn-circle">
+			<div class="tooltip tooltip-left" data-tip={t("dock.copyPlainText")}>
+				<button class="btn btn-lg btn-circle" aria-label={t("dock.copyPlainText")}>
 					<span class="icon-copy" />
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip="Create new note">
-				<button class="btn btn-lg btn-circle">
+			<div class="tooltip tooltip-left" data-tip={t("dock.createNote")}>
+				<button class="btn btn-lg btn-circle" aria-label={t("dock.createNote")}>
 					<span class="icon-sticky-note-plus" />
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip="Delete note">
-				<button class="btn btn-lg btn-circle">
+			<div class="tooltip tooltip-left" data-tip={t("dock.deleteNote")}>
+				<button class="btn btn-lg btn-circle" aria-label={t("dock.deleteNote")}>
 					<span class="icon-trash" />
 				</button>
 			</div>

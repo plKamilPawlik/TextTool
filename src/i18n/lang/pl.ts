@@ -13,5 +13,5 @@ export const pl: Translation = {
 	"notes.confirmDelete": "Czy na pewno chcesz usunąć tę notatkę?",
 	"status.words": "słów",
 	"status.characters": "znaków",
-	"status.selection": "Zaznaczono: {count}",
+	"status.selection": "zaznaczono: {count}",
 } as const;

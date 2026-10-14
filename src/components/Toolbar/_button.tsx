@@ -1,3 +1,5 @@
+import { useLocale } from "~/contexts/locale";
+
 export function ActionButton(props: { icon: string; isActive: boolean; onClick(): void }) {
 	return (
 		<button
@@ -10,19 +12,23 @@ export function ActionButton(props: { icon: string; isActive: boolean; onClick()
 }
 
 export function CopyButton(props: { onClick(): Promise<void> }) {
+	const { t } = useLocale();
+
 	return (
 		<button class="btn btn-primary justify-start w-22" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-plus" />
-			<span>Copy</span>
+			<span>{t("toolbar.copy")}</span>
 		</button>
 	);
 }
 
 export function PasteButton(props: { onClick(): Promise<void> }) {
+	const { t } = useLocale();
+
 	return (
 		<button class="btn btn-neutral justify-start w-22" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-paste" />
-			<span>Paste</span>
+			<span>{t("toolbar.paste")}</span>
 		</button>
 	);
 }

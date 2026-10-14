@@ -1,11 +1,13 @@
 import { Show } from "solid-js";
 
 import { useEditor } from "~/contexts/editor";
+import { useLocale } from "~/contexts/locale";
 
 import { SpeedDial } from "./_dial";
 
 export default function () {
 	const { editor } = useEditor();
+	const { t } = useLocale();
 
 	const characters = () => editor()!.storage.characterCount.characters();
 	const words = () => editor()!.storage.characterCount.words();
@@ -20,8 +22,8 @@ export default function () {
 			<div class="dock dock-xs static">
 				<div class="max-w-min select-none">
 					<span class="dock-label text-nowrap text-xs">
-						{words()} words · {characters()} characters
-						{selection() && ` (${selection().length} selected)`}
+						{words()} {t("status.words")} · {characters()} {t("status.characters")}
+						{selection() && ` (${t("status.selection", { count: selection().length })})`}
 					</span>
 				</div>
 				<div class="max-w-full relative">
