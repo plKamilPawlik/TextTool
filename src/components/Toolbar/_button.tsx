@@ -11,7 +11,7 @@ export function ActionButton(props: { icon: string; isActive: boolean; onClick()
 
 export function CopyButton(props: { onClick(): Promise<void> }) {
 	return (
-		<button class="btn btn-primary w-22" onClick={() => props.onClick()}>
+		<button class="btn btn-primary justify-start w-22" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-plus" />
 			<span>Copy</span>
 		</button>
@@ -20,7 +20,7 @@ export function CopyButton(props: { onClick(): Promise<void> }) {
 
 export function PasteButton(props: { onClick(): Promise<void> }) {
 	return (
-		<button class="btn btn-neutral w-22" onClick={() => props.onClick()}>
+		<button class="btn btn-neutral justify-start w-22" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-paste" />
 			<span>Paste</span>
 		</button>

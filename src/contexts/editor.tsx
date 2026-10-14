@@ -14,21 +14,18 @@ export const EditorContext = createContext<{
 }>();
 
 export function EditorProvider(props: ParentProps<{ content?: string }>) {
-	const { remove, save } = useNotes();
+	const { save } = useNotes();
 
 	const [editor, setEditor] = createSignal<Editor | undefined>(undefined, { equals: false });
 	const [noteId, setNoteId] = createSignal<IDBValidKey | undefined>(undefined);
 
 	const saveEdit = createDebounce((editor: Editor) => {
-		const _id = noteId();
-
 		if (editor.storage.characterCount.words()) {
+			const _id = noteId();
 			const content = editor.getHTML();
 			const timestamp = Date.now();
 
 			save({ _id, content, timestamp }).then(setNoteId);
-		} else if (_id) {
-			remove(_id);
 		}
 	}, 1000);
 

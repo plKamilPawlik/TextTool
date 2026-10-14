@@ -1,7 +1,7 @@
 declare interface Note extends Partial<NoteOptions> {
 	_id?: IDBValidKey;
-	timestamp: number;
 	content: string;
+	timestamp: number;
 }
 
 declare interface NoteOptions {

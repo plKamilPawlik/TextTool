@@ -1,4 +1,4 @@
-import { EditMode, Locale, NewNote } from "./_action";
+import { EditMode, Locale, Grammar } from "./_action";
 
 export default function (props: { sidebarId: string }) {
 	return (
@@ -8,11 +8,11 @@ export default function (props: { sidebarId: string }) {
 					<span class="icon-notebook" />
 				</label>
 			</div>
-			<div class="flex flex-row flex-1">
+			<div class="flex flex-row flex-1 select-none">
 				<h2 class="text-xl font-bold">TextTool</h2>
 			</div>
-			<div class="flex felx-row gap-2 items-center cursor-pointer">
-				<NewNote />
+			<div class="flex felx-row gap-2 items-center">
+				<Grammar />
 				<EditMode />
 				<Locale />
 			</div>

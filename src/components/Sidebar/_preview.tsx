@@ -3,7 +3,7 @@ import { For } from "solid-js";
 import { useEditor } from "~/contexts/editor";
 import { useNotes } from "~/contexts/notes";
 
-import { ButtonDelete } from "./_button";
+import { DeleteNote, ToggleBookmark } from "./_action";
 
 export function PreviewList(props: { closeSidebar(): void }) {
 	const { open } = useEditor();
@@ -24,12 +24,13 @@ export function PreviewList(props: { closeSidebar(): void }) {
 		<ul class="list overflow-auto p-2">
 			<For each={notes()} keyed={(note) => note._id}>
 				{(note) => (
-					<li class="list-row">
+					<li class="list-row gap-1">
 						<div class="list-col-grow">
 							<PreviewNote note={note()} open={() => openNote(note())} />
 						</div>
-						<div>
-							<ButtonDelete delete={() => safeRemove(note())} />
+						<div class="flex flex-col gap-1">
+							<ToggleBookmark />
+							<DeleteNote delete={() => safeRemove(note())} />
 						</div>
 					</li>
 				)}

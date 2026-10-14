@@ -2,6 +2,8 @@ import { Show } from "solid-js";
 
 import { useEditor } from "~/contexts/editor";
 
+import { SpeedDial } from "./_dial";
+
 export default function () {
 	const { editor } = useEditor();
 
@@ -16,12 +18,13 @@ export default function () {
 	return (
 		<Show when={editor()}>
 			<div class="dock dock-xs static">
-				<div class="max-w-min mr-auto">
+				<div class="max-w-min mr-auto select-none">
 					<span class="dock-label text-nowrap text-xs">
 						{words()} words · {characters()} characters
 						{selection() && ` (${selection().length} selected)`}
 					</span>
 				</div>
+				<SpeedDial />
 			</div>
 		</Show>
 	);

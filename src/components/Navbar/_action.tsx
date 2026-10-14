@@ -1,12 +1,10 @@
 import { useEditor } from "~/contexts/editor";
 import { useLocale } from "~/contexts/locale";
 
-export function NewNote() {
-	const { open } = useEditor();
-
+export function Grammar() {
 	return (
-		<button class="btn btn-ghost btn-square text-xl" onClick={() => open()}>
-			<span class="icon-plus" />
+		<button class="btn btn-ghost btn-square text-lg" disabled>
+			<span class="icon-spell-check" />
 		</button>
 	);
 }
@@ -36,15 +34,15 @@ export function Locale() {
 
 	return (
 		<select
-			class="select select-ghost w-16"
+			class="select select-ghost text-lg w-16"
 			onChange={(e) => setLang(e.target.value)}
 			value={lang()}
 		>
 			<option disabled selected>
 				Language
 			</option>
-			<option value="en">🇺🇸 English</option>
-			<option value="pl">🇵🇱 Polish</option>
+			<option value="en">🇺🇸</option>
+			<option value="pl">🇵🇱</option>
 		</select>
 	);
 }
