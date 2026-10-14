@@ -47,7 +47,7 @@ export function NotesProvider(props: ParentProps) {
 			.deleteNotes(daysAgo(7))
 			.then(refresh)
 			.then((notes) => {
-				if (notes[0].timestamp >= minutesAgo(2).getTime()) {
+				if (notes[0]?.timestamp >= minutesAgo(2).getTime()) {
 					setDraft(notes[0]);
 				}
 			});

@@ -1,0 +1,15 @@
+export const en = {
+	"editor.placeholder": "Write something...",
+	"locale.label": "Language",
+	"toolbar.copy": "Copy",
+	"toolbar.paste": "Paste",
+	"dock.clearStyles": "Clear all styles",
+	"dock.copyPlainText": "Copy as plain text",
+	"dock.createNote": "Create new note",
+	"dock.deleteNote": "Delete note",
+	"notes.new": "New Note",
+	"notes.confirmDelete": "Are you sure you want to delete this note?",
+	"status.words": "words",
+	"status.characters": "characters",
+	"status.selection": "{count} selected",
+} as const;

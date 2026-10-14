@@ -48,12 +48,11 @@ export function EditorProvider(props: ParentProps) {
 		setEditor(editorInstance);
 	}
 
-	createEffect(
-		() => draft().content,
-		(content, previous) => {
-			if (content !== previous) editorInstance.commands.setContent(content);
-		},
-	);
+	createEffect(draft, (next, prev) => {
+		if (next._id !== prev?._id) {
+			editorInstance.commands.setContent(next.content);
+		}
+	});
 
 	return <EditorContext value={{ editor, mount }}>{props.children}</EditorContext>;
 }

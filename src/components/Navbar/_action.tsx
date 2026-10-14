@@ -30,12 +30,12 @@ export function Grammar() {
 }
 
 export function Locale() {
-	const { lang, setLang } = useLocale();
+	const { lang, setLocale } = useLocale();
 
 	return (
 		<select
 			class="select select-ghost text-lg w-16"
-			onChange={(e) => setLang(e.target.value)}
+			onChange={(e) => setLocale(e.target.value)}
 			value={lang()}
 		>
 			<option disabled selected>
