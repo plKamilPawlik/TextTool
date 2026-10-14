@@ -1,4 +1,4 @@
-import { EditMode, Locale, Grammar } from "./_action";
+import { Editable, Locale, Grammar } from "./_action";
 
 export default function (props: { sidebarId: string }) {
 	return (
@@ -13,7 +13,7 @@ export default function (props: { sidebarId: string }) {
 			</div>
 			<div class="flex felx-row gap-2 items-center">
 				<Grammar />
-				<EditMode />
+				<Editable />
 				<Locale />
 			</div>
 		</div>

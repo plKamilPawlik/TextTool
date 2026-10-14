@@ -1,51 +1,18 @@
-import { For } from "solid-js";
-
-import { useEditor } from "~/contexts/editor";
 import { useNotes } from "~/contexts/notes";
 
-import { DeleteNote, ToggleBookmark } from "./_action";
+export function DraftPreview(props: { note: Note }) {
+	const { open } = useNotes();
 
-export function PreviewList(props: { closeSidebar(): void }) {
-	const { open } = useEditor();
-	const { notes, remove } = useNotes();
-
-	function openNote(note: Note): void {
-		props.closeSidebar();
+	function openDraft(note: Note): void {
 		open(note);
 	}
 
-	function safeRemove(note: Note) {
-		if (confirm("Are you sure you want to delete this note?")) {
-			remove(note._id!);
-		}
-	}
-
-	return (
-		<ul class="list overflow-auto p-2">
-			<For each={notes()} keyed={(note) => note._id}>
-				{(note) => (
-					<li class="list-row gap-1">
-						<div class="list-col-grow">
-							<PreviewNote note={note()} open={() => openNote(note())} />
-						</div>
-						<div class="flex flex-col gap-1">
-							<ToggleBookmark />
-							<DeleteNote delete={() => safeRemove(note())} />
-						</div>
-					</li>
-				)}
-			</For>
-		</ul>
-	);
-}
-
-export function PreviewNote(props: { note: Note; open(): void }) {
 	return (
 		<div
 			class="hover:cursor-pointer hover:opacity-60"
 			role="button"
 			tabindex={0}
-			onClick={() => props.open()}
+			onClick={() => openDraft(props.note)}
 		>
 			<div class="h-24 flex flex-col gap-1">
 				<p class="line-clamp-1 font-semibold" innerHTML={props.note.content} />

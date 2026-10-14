@@ -1,17 +1,19 @@
-import { onSettled } from "solid-js";
+import { createEffect } from "solid-js";
 
+import { useNotes } from "~/contexts/notes";
+
+import { Drafts } from "./_drafts";
 import { Footer } from "./_footer";
-import { PreviewList } from "./_preview";
 
 export default function (props: { sidebarId: string }) {
-	let checkbox!: HTMLInputElement;
+	let sidebarToggle!: HTMLInputElement;
 
-	function closeSidebar(): void {
-		checkbox.checked = false;
-	}
+	const { draft } = useNotes();
 
-	onSettled(() => {
-		checkbox = document.getElementById(props.sidebarId) as HTMLInputElement;
+	createEffect(draft, () => {
+		// automatically close the sidebar when a draft is selected
+		sidebarToggle = document.getElementById(props.sidebarId) as HTMLInputElement;
+		sidebarToggle.checked = false;
 	});
 
 	return (
@@ -19,8 +21,8 @@ export default function (props: { sidebarId: string }) {
 			<label for={props.sidebarId} class="drawer-overlay" />
 			<aside class="grid w-80 h-full bg-base-200 border-base-300 border-r">
 				<div class="flex flex-col overflow-hidden justify-between">
-					<PreviewList closeSidebar={closeSidebar} />
-					<Footer closeSidebar={closeSidebar} />
+					<Drafts />
+					<Footer />
 				</div>
 			</aside>
 		</>

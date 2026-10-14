@@ -18,13 +18,15 @@ export default function () {
 	return (
 		<Show when={editor()}>
 			<div class="dock dock-xs static">
-				<div class="max-w-min mr-auto select-none">
+				<div class="max-w-min select-none">
 					<span class="dock-label text-nowrap text-xs">
 						{words()} words · {characters()} characters
 						{selection() && ` (${selection().length} selected)`}
 					</span>
 				</div>
-				<SpeedDial />
+				<div class="max-w-full relative">
+					<SpeedDial />
+				</div>
 			</div>
 		</Show>
 	);

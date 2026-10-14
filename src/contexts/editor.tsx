@@ -1,38 +1,34 @@
 import { Editor } from "@tiptap/core";
 import { CharacterCount, Placeholder } from "@tiptap/extensions";
 import { StarterKit } from "@tiptap/starter-kit";
-import { createContext, createSignal, flush, ParentProps, useContext } from "solid-js";
+import { createContext, createEffect, createSignal, ParentProps, useContext } from "solid-js";
 
 import { createDebounce } from "~/hooks/debounce";
 
 import { useNotes } from "./notes";
 
 export const EditorContext = createContext<{
-	editor(): Editor | undefined;
+	editor(): Editor | null;
 	mount(ref: HTMLElement): void;
-	open(note?: Note): void;
 }>();
 
-export function EditorProvider(props: ParentProps<{ content?: string }>) {
-	const { save } = useNotes();
+export function EditorProvider(props: ParentProps) {
+	let editorInstance!: Editor;
 
-	const [editor, setEditor] = createSignal<Editor | undefined>(undefined, { equals: false });
-	const [noteId, setNoteId] = createSignal<IDBValidKey | undefined>(undefined);
+	const { draft, edit, remove } = useNotes();
+	const [editor, setEditor] = createSignal<Editor | null>(null, { equals: false });
 
 	const saveEdit = createDebounce((editor: Editor) => {
 		if (editor.storage.characterCount.words()) {
-			const _id = noteId();
-			const content = editor.getHTML();
-			const timestamp = Date.now();
-
-			save({ _id, content, timestamp }).then(setNoteId);
+			edit({ content: editor.getHTML(), timestamp: Date.now() });
+		} else {
+			remove(draft()._id);
 		}
-	}, 1000);
+	}, 700);
 
 	function mount(ref: HTMLElement): void {
-		const instance = new Editor({
+		editorInstance = new Editor({
 			autofocus: true,
-			content: props.content,
 			element: ref,
 			extensions: [
 				StarterKit,
@@ -49,15 +45,17 @@ export function EditorProvider(props: ParentProps<{ content?: string }>) {
 			},
 		});
 
-		setEditor(instance);
+		setEditor(editorInstance);
 	}
 
-	function open(note?: Note): void {
-		flush(() => setNoteId(note?._id));
-		editor()!.commands.setContent(note?.content || "");
-	}
+	createEffect(
+		() => draft().content,
+		(content, previous) => {
+			if (content !== previous) editorInstance.commands.setContent(content);
+		},
+	);
 
-	return <EditorContext value={{ editor, mount, open }}>{props.children}</EditorContext>;
+	return <EditorContext value={{ editor, mount }}>{props.children}</EditorContext>;
 }
 
 export function useEditor() {

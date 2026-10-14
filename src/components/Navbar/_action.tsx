@@ -1,15 +1,7 @@
 import { useEditor } from "~/contexts/editor";
 import { useLocale } from "~/contexts/locale";
 
-export function Grammar() {
-	return (
-		<button class="btn btn-ghost btn-square text-lg" disabled>
-			<span class="icon-spell-check" />
-		</button>
-	);
-}
-
-export function EditMode() {
+export function Editable() {
 	const { editor } = useEditor();
 
 	function toggle(mode: boolean) {
@@ -26,6 +18,14 @@ export function EditMode() {
 			<span class="swap-on icon-pen-line" />
 			<span class="swap-off icon-pen-off" />
 		</label>
+	);
+}
+
+export function Grammar() {
+	return (
+		<button class="btn btn-ghost btn-square text-lg" disabled>
+			<span class="icon-spell-check" />
+		</button>
 	);
 }
 
