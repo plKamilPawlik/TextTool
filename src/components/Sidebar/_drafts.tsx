@@ -9,7 +9,7 @@ export function Drafts() {
 	const { notes } = useNotes();
 
 	return (
-		<ul class="list overflow-auto p-2">
+		<ul class="flex-1 list overflow-auto p-2">
 			<For each={notes()} keyed={(note) => note._id}>
 				{(note) => (
 					<li class="list-row gap-1">

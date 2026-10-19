@@ -32,6 +32,7 @@ export function EditorProvider(props: ParentProps) {
 	}, 700);
 
 	function mount(ref: HTMLElement): void {
+		editorInstance?.destroy();
 		editorInstance = new Editor({
 			autofocus: true,
 			element: ref,

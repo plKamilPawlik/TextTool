@@ -1,4 +1,4 @@
-import { Editable, Locale, Grammar } from "./_action";
+import { EditMode, LocaleController, GrammarCheck, ThemeController } from "./_action";
 
 export default function (props: { sidebarId: string }) {
 	return (
@@ -12,9 +12,10 @@ export default function (props: { sidebarId: string }) {
 				<h2 class="text-xl font-bold">TextTool</h2>
 			</div>
 			<div class="flex felx-row gap-2 items-center">
-				<Grammar />
-				<Editable />
-				<Locale />
+				<GrammarCheck />
+				<EditMode />
+				<ThemeController />
+				<LocaleController />
 			</div>
 		</div>
 	);

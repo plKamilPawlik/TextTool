@@ -10,8 +10,10 @@ export default function Document(props: ParentProps) {
 			<head>
 				<meta charset="utf-8" />
 				<meta name="description" content={description} />
-				<meta name="theme-color" content="#ffffff" />
 				<meta name="viewport" content={viewport} />
+
+				<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+				<meta name="theme-color" content="#1d232a" media="(prefers-color-scheme: dark)" />
 
 				<link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
 				<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="48x48" />

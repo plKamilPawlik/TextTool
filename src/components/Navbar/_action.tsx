@@ -1,7 +1,8 @@
 import { useEditor } from "~/contexts/editor";
 import { useLocale } from "~/contexts/locale";
+import { useTheme } from "~/contexts/theme";
 
-export function Editable() {
+export function EditMode() {
 	const { editor } = useEditor();
 
 	function toggle(mode: boolean) {
@@ -21,7 +22,7 @@ export function Editable() {
 	);
 }
 
-export function Grammar() {
+export function GrammarCheck() {
 	return (
 		<button class="btn btn-ghost btn-square text-lg" disabled>
 			<span class="icon-spell-check" />
@@ -29,21 +30,38 @@ export function Grammar() {
 	);
 }
 
-export function Locale() {
+export function LocaleController() {
 	const { lang, setLocale, t } = useLocale();
 
 	return (
 		<select
-			class="select select-ghost text-lg w-16"
+			class="select select-ghost text-lg w-min"
 			aria-label={t("locale.label")}
 			onChange={(e) => setLocale(e.target.value)}
 			value={lang()}
 		>
-			<option disabled selected>
-				{t("locale.label")}
-			</option>
 			<option value="en">🇺🇸</option>
 			<option value="pl">🇵🇱</option>
 		</select>
+	);
+}
+
+export function ThemeController() {
+	const { theme, setTheme } = useTheme();
+
+	function toggle(mode: boolean) {
+		setTheme(mode ? "dark" : "light");
+	}
+
+	return (
+		<label class="btn btn-ghost btn-square swap text-lg">
+			<input
+				type="checkbox"
+				checked={theme() === "dark"}
+				onChange={(e) => toggle(e.target.checked)}
+			/>
+			<span class="swap-on icon-moon" />
+			<span class="swap-off icon-sun" />
+		</label>
 	);
 }

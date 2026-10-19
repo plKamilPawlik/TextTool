@@ -5,15 +5,17 @@
 @plugin "@tailwindcss/container-queries";
 
 @plugin "daisyui" {
-	themes: light --default;
+	themes:
+		light --default,
+		dark --prefersdark;
 }
 
 .tiptap {
 	@apply prose sm:prose-base lg:prose-lg xl:prose-xl focus:outline-none;
 
 	display: block;
+	height: 100%;
 	margin: 0 auto;
-	min-height: 320px;
 }
 
 .tiptap p.is-editor-empty:first-child::before {

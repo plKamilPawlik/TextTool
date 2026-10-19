@@ -47,7 +47,7 @@ export default function () {
 
 	return (
 		<Show when={editor()}>
-			<div class="bg-base-200 border-t border-base-300">
+			<div class="bg-base-200 border-base-300 border-t">
 				<div class="flex flex-nowrap gap-1 p-2 overflow-x-auto">
 					{editor()!.isEmpty ? (
 						<PasteButton onClick={() => pasteFromClipboard()} />
