@@ -9,7 +9,8 @@ export default function (props: { sidebarId: string }) {
 				</label>
 			</div>
 			<div class="flex flex-row flex-1 select-none">
-				<h2 class="text-xl font-bold">TextTool</h2>
+				<h2 class="text-xl font-bold hidden sm:block">TextTool</h2>
+				<h2 class="text-xl font-bold block sm:hidden">TT</h2>
 			</div>
 			<div class="flex felx-row gap-2 items-center">
 				<GrammarCheck />
