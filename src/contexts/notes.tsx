@@ -1,6 +1,6 @@
 import { createContext, createSignal, onSettled, ParentProps, useContext } from "solid-js";
 
-import * as $notes from "~/database/--notes";
+import * as $notes from "~/database/notes";
 import { daysAgo, minutesAgo } from "~/utils/date";
 import { EmptyNote } from "~/utils/note";
 
@@ -35,6 +35,7 @@ export function NotesProvider(props: ParentProps) {
 	}
 
 	async function remove(id: IDBValidKey): Promise<Note[]> {
+		if (draft()._id === id) await open({});
 		return $notes.deleteNote(id).then(refresh);
 	}
 

@@ -14,7 +14,7 @@ export default function () {
 
 	const selection = () => {
 		const { from, to } = editor()!.state.selection;
-		return editor()!.state.doc.textBetween(from, to, "\n");
+		return editor()!.state.doc.textBetween(from, to);
 	};
 
 	return (

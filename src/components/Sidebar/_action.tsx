@@ -5,7 +5,7 @@ export function DeleteNote(props: { note: Note }) {
 	const { remove } = useNotes();
 	const { t } = useLocale();
 
-	function safeRemove(): void {
+	function safeDelete(): void {
 		if (confirm(t("notes.confirmDelete"))) {
 			remove(props.note._id);
 		}
@@ -15,7 +15,7 @@ export function DeleteNote(props: { note: Note }) {
 		<button
 			class="btn btn-ghost btn-square btn-sm text-base"
 			aria-label={t("dock.deleteNote")}
-			onClick={() => safeRemove()}
+			onClick={() => safeDelete()}
 		>
 			<span class="icon-trash" />
 		</button>

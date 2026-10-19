@@ -15,7 +15,7 @@ export function CopyButton(props: { onClick(): Promise<void> }) {
 	const { t } = useLocale();
 
 	return (
-		<button class="btn btn-primary justify-start w-22" onClick={() => props.onClick()}>
+		<button class="btn btn-primary justify-start w-24" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-plus" />
 			<span>{t("toolbar.copy")}</span>
 		</button>
@@ -26,7 +26,7 @@ export function PasteButton(props: { onClick(): Promise<void> }) {
 	const { t } = useLocale();
 
 	return (
-		<button class="btn btn-neutral justify-start w-22" onClick={() => props.onClick()}>
+		<button class="btn btn-neutral justify-start w-24" onClick={() => props.onClick()}>
 			<span class="icon-clipboard-paste" />
 			<span>{t("toolbar.paste")}</span>
 		</button>
