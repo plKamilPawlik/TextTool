@@ -37,7 +37,7 @@ The development server starts at `http://localhost:3000`.
 | `npm run build`     | Builds the app into `dist/client`.       |
 | `npm run serve`     | Locally previews the production build.   |
 | `npm run task:lint` | Lints files in `src` with Oxlint.        |
-| `npm run task:fmt`  | Formats files in `src` with Oxfmt.       |
+| `npm run task:fmt`  | Formats all files with Oxfmt.            |
 | `npm run deploy`    | Publishes `dist/client` with `gh-pages`. |
 
 ## Technology
@@ -45,6 +45,10 @@ The development server starts at `http://localhost:3000`.
 SolidJS, TypeScript, Vite, TipTap, Tailwind CSS, and IndexedDB.
 
 ## Changelog
+
+### 0.2.1 — 2026-10-20
+
+- Minor UI updates to improve usability on phones, especially those running iOS 27.
 
 ### 0.2.0 — 2026-10-19
 

@@ -24,7 +24,7 @@ export function EditorProvider(props: ParentProps) {
 
 	const translation = () => t("editor.placeholder");
 	const updateDraft = createDebounce((editor: Editor) => {
-		if (editor.storage.characterCount.words()) {
+		if (editor.storage.characterCount.characters()) {
 			edit({ content: editor.getHTML(), timestamp: Date.now() });
 		} else {
 			remove(draft()._id);

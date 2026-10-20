@@ -12,10 +12,10 @@ export default function () {
 
 	return (
 		<AppProvider version={version}>
-			<div class="h-dvh w-dvw drawer xl:drawer-open">
+			<div class="h-dvh w-dvw fixed drawer xl:drawer-open">
 				<input id={sidebarId} class="drawer-toggle" type="checkbox" />
 				<div class="drawer-content overflow-hidden">
-					<main class="flex flex-col h-full">
+					<main class="flex flex-col h-full bg-base-100">
 						<Navbar sidebarId={sidebarId} />
 						<Toolbar />
 						<Editor />

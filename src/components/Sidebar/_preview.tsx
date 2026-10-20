@@ -18,7 +18,7 @@ export function DraftPreview(props: { note: Note }) {
 
 	return (
 		<div
-			class="hover:cursor-pointer hover:opacity-60"
+			class="hover:cursor-pointer hover:opacity-80"
 			role="button"
 			tabindex={0}
 			onClick={() => open(props.note)}

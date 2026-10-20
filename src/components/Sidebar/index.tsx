@@ -20,7 +20,7 @@ export default function (props: { sidebarId: string }) {
 	return (
 		<>
 			<label for={props.sidebarId} class="drawer-overlay" />
-			<aside class="grid w-80 h-full bg-base-200 border-base-300 border-r">
+			<aside class="grid w-80 h-full bg-base-100 xl:bg-base-200 border-base-300 border-r">
 				<div class="flex flex-col overflow-hidden">
 					<Version />
 					<Drafts />

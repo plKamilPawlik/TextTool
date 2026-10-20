@@ -2,6 +2,14 @@ import { useEditor } from "~/contexts/editor";
 import { useLocale } from "~/contexts/locale";
 import { useTheme } from "~/contexts/theme";
 
+export function DrawerToggle(props: { sidebarId: string }) {
+	return (
+		<label class="btn btn-ghost btn-square drawer-button text-lg" for={props.sidebarId}>
+			<span class="icon-notebook" />
+		</label>
+	);
+}
+
 export function EditMode() {
 	const { editor } = useEditor();
 

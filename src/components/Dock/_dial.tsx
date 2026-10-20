@@ -31,7 +31,7 @@ export function SpeedDial() {
 				<span class="icon-x" />
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip={t("dock.clearStyles")}>
+			<div class="tooltip tooltip-left tooltip-open" data-tip={t("dock.clearStyles")}>
 				<button
 					class="btn btn-lg btn-circle"
 					aria-label={t("dock.clearStyles")}
@@ -41,7 +41,7 @@ export function SpeedDial() {
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip={t("dock.copyPlainText")}>
+			<div class="tooltip tooltip-left tooltip-open" data-tip={t("dock.copyPlainText")}>
 				<button
 					class="btn btn-lg btn-circle"
 					aria-label={t("dock.copyPlainText")}
@@ -51,7 +51,7 @@ export function SpeedDial() {
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip={t("dock.createNote")}>
+			<div class="tooltip tooltip-left tooltip-open" data-tip={t("dock.createNote")}>
 				<button
 					class="btn btn-lg btn-circle"
 					aria-label={t("dock.createNote")}
@@ -61,7 +61,7 @@ export function SpeedDial() {
 				</button>
 			</div>
 
-			<div class="tooltip tooltip-left" data-tip={t("dock.deleteNote")}>
+			<div class="tooltip tooltip-left tooltip-open" data-tip={t("dock.deleteNote")}>
 				<button
 					class="btn btn-lg btn-circle"
 					aria-label={t("dock.deleteNote")}

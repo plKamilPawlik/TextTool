@@ -19,14 +19,12 @@ export default function () {
 
 	return (
 		<Show when={editor()}>
-			<div class="dock dock-xs static">
-				<div class="max-w-min select-none">
-					<span class="dock-label text-nowrap text-xs">
-						{words()} {t("status.words")} · {characters()} {t("status.characters")}
-						{selection() && ` (${t("status.selection", { count: selection().length })})`}
-					</span>
+			<div class="dock dock-xs static justify-between">
+				<div class="dock-label max-w-max text-nowrap text-xs">
+					{words()} {t("status.words")} · {characters()} {t("status.characters")}
+					{selection() && ` (${t("status.selection", { count: selection().length })})`}
 				</div>
-				<div class="max-w-full relative">
+				<div class="relative opacity-100">
 					<SpeedDial />
 				</div>
 			</div>

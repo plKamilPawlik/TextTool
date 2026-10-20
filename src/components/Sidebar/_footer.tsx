@@ -6,10 +6,12 @@ export function Footer() {
 	const { t } = useLocale();
 
 	return (
-		<div class="dock dock-xs static bg-base-200 xl:bg-base-100">
-			<button class="btn btn-neutral btn-wide flex-row text-base" onClick={() => open({})}>
-				<span class="icon-plus" /> {t("notes.new")}
-			</button>
+		<div class="dock dock-xs static">
+			<div class="max-w-full opacity-100">
+				<button class="btn btn-neutral btn-wide flex-row text-base" onClick={() => open({})}>
+					<span class="icon-plus" /> {t("notes.new")}
+				</button>
+			</div>
 		</div>
 	);
 }
